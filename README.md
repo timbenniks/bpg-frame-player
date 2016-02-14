@@ -1,7 +1,7 @@
 # BPG Frame player
-A frame sequence player with a bpm file as source file. It uses a web worker to parse an animated BPG file.
+A frame sequence player with a BPG encoded file (H.265 / HEVC) as its source. It uses a web worker to decode an animated BPG file.
 
-Highly experimental. Currently crashing my iPhone 6. I expect this is happening due to either too many frames, high image resolution or hight image render quality.
+Highly experimental. Currently crashing my iPhone 6.
 
 ## Prerequisites
 * ffmpeg `brew install ffmpeg` see: https://www.ffmpeg.org/
