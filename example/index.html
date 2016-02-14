@@ -36,6 +36,7 @@
     }
   </style>
 <body>
+
   <div class="bpg-frame-player"></div>
   <div class="controls">
     <button class="play">play</button>
@@ -43,35 +44,53 @@
     <button class="gotoframe">go to frame 50</button>
     <span class="frame">0</span>
   </div>
+
   <script src="../lib/BPGFramePlayer.js"></script>
+
   <script>
     window.onload = function(){
+      
       var controls = document.querySelector( '.controls' ),
           frspan = document.querySelector( '.frame' ),
           play = document.querySelector( '.play' ),
           pause = document.querySelector( '.pause' ),
           gotoframe = document.querySelector( '.gotoframe' ),
-          node = document.querySelector('.bpg-frame-player'),
-          bpg = new BPGFramePlayer({
-            node: node,
-            url: 'example/dance_small.bpg',
-            width: 1280,
-            height: 720,
-            loop: true,
-            debug: true,
-            onFrameUpdate: function( frame, frames ){
-              frspan.textContent = 'frame: ' + frame + '/' + frames;
-            },
-            onComplete: function( frame ){
-              console.log( 'complete', frame );
-            },
-            onLoaded: function(){
-              controls.style.display = 'block';
-              play.addEventListener( 'click', function(){ bpg.play(); }, false );
-              pause.addEventListener( 'click', function(){ bpg.pause(); }, false );
-              gotoframe.addEventListener( 'click', function(){ bpg.goToFrame( 50 ); }, false );
-            }
-          });
+          node = document.querySelector('.bpg-frame-player');
+
+      var bpg = new BPGFramePlayer({
+        node: node,
+        url: 'example/dance.bpg',
+        width: 1280,
+        height: 720,
+        loop: true,
+        debug: true,
+        autoplay: true,
+        workerUrl: '../lib/bpgdecoder.js',
+
+        onFrameUpdate: function( frame, frames ){
+          frspan.textContent = 'frame: ' + frame + '/' + frames;
+        },
+        
+        onComplete: function( frame ){
+          console.log( 'complete', frame );
+        },
+        
+        onLoaded: function(){
+          controls.style.display = 'block';
+          
+          play.addEventListener( 'click', function(){ 
+            bpg.play(); 
+          }, false );
+          
+          pause.addEventListener( 'click', function(){ 
+            bpg.pause(); 
+          }, false );
+          
+          gotoframe.addEventListener( 'click', function(){ 
+            bpg.goToFrame( 50 ); 
+          }, false );
+        }
+      });
     }
   </script>
 </body>
